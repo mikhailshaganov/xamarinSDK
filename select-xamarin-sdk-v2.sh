@@ -31,7 +31,7 @@ mac) echo "mac = $value" ;;
 esac
 done
 
-if ![ -z "mono" ]; then
+if ![ -z "mono" ] then
   IFS='.'
   read -a arr <<< "$frameworkMono"
   if ![${!arr[@]} == 2]
