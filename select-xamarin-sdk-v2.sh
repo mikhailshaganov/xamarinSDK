@@ -1,8 +1,8 @@
 #!/bin/bash -e -o pipefail
-if [ -z "$1" ]; then
-  echo "No Xamarin SDK specified."
-  exit 0
-fi
+# if [ -z "$1" ]; then
+#   echo "No Xamarin SDK specified."
+#   exit 0
+# fi
 
 echo "Set mono to ${mono}"
 
@@ -13,6 +13,23 @@ frameworkMac=mac
 
 folderListPosition = 0
 frameworkVersion = 0
+
+for arg in "$@"
+do
+
+#Separate argument name and value
+key=$(echo $arg | cut -f1 -d=)
+value=$(echo $arg | cut -f2 -d=)
+
+#Print message based on argument’s name
+case $key in
+mono) echo "mono = $value";;
+ios) echo "ios = $value" ;;
+android) echo "android = $value" ;;
+mac) echo "mac = $value" ;;
+*)
+esac
+done
 
 if ![ -z "mono" ]; then
   IFS='.'
