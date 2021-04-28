@@ -11,8 +11,8 @@ frameworkIOS=ios
 frameworkAndroid=android
 frameworkMac=mac
 
-folderListPosition = 0
-frameworkVersion = 0
+folderListPosition=0
+frameworkVersion=0
 
 for arg in "$@"
 do
@@ -34,7 +34,7 @@ done
 if ![ -z "mono" ] then
   IFS='.'
   read -a arr <<< "$frameworkMono"
-  if ![${!arr[@]} == 2]
+  if [ !${!arr[@]} == 2 ] then
     echo "Wrong framework's versions."
   fi
   folderListPosition = 0;
