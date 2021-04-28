@@ -4,9 +4,28 @@ if [ -z "$1" ]; then
   exit 0
 fi
 
-XAMARIN_SDK=$1
+echo "Set mono to ${mono}"
 
-echo "Set Xamarin SDK to ${XAMARIN_SDK}"
+frameworkMono=mono
+frameworkIOS=ios
+frameworkAndroid=android
+frameworkMac=mac
+
+folderListPosition = 0
+frameworkVersion = 0
+
+if ![ -z "mono" ]; then
+  IFS='.'
+  read -a arr <<< "$frameworkMono"
+  if ![${!arr[@]} == 2]
+    echo "Wrong framework's versions."
+  fi
+  folderListPosition = 0;
+  frameworkVersion = frameworkMono
+fi
+
+
+echo "Set SDK to ${frameworkVersion}"
 FOLDERS_LIST=(
         '/Library/Frameworks/Mono.framework/Versions'
         '/Library/Frameworks/Xamarin.iOS.framework/Versions'
@@ -20,3 +39,13 @@ do
     sudo rm -f ${FOLDER}/Current
     sudo ln -s ${FOLDER}/${XAMARIN_SDK} ${FOLDER}/Current
 done
+
+function setCurrentFolder() {
+    FOLDER = FOLDERS_LIST[folderListPosition]
+    echo "Set Current folder for ${FOLDER}"
+    sudo rm -f ${FOLDER}/Current
+    sudo ln -s ${FOLDER}/${frameworkVersion} ${FOLDER}/Current
+}
+
+
+
