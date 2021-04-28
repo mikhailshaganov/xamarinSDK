@@ -30,6 +30,7 @@ set_current_folder ()
 
     FOLDER=${FOLDERS_LIST[folderListPosition]}
     echo "Set Current folder for ${FOLDER}"
+    echo "Current new folder ${FOLDER}/${version} ${FOLDER}/Current"
     sudo rm -f ${FOLDER}/Current
     sudo ln -s ${FOLDER}/${version} ${FOLDER}/Current
 }    
