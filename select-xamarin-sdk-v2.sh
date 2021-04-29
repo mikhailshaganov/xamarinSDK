@@ -29,7 +29,6 @@ set_current_folder() {
   fi
 
   local FOLDER=$(get_framework_path "$framework")
-  echo "FOLDER=${FOLDER}"
   sudo rm -f ${FOLDER}/Current
   sudo ln -s "${FOLDER}/${version}" "${FOLDER}/Current"
 }
