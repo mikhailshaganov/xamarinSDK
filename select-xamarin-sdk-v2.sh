@@ -2,10 +2,10 @@
 
 get_framework_path() {
   case $1 in
-  mono) echo '/Library/Frameworks/Mono.framework/Versions' ;;
-  ios) echo '/Library/Frameworks/Xamarin.iOS.framework/Versions' ;;
-  android) echo '/Library/Frameworks/Xamarin.Android.framework/Versions' ;;
-  mac) echo '/Library/Frameworks/Xamarin.Mac.framework/Versions' ;;
+  --mono) echo '/Library/Frameworks/Mono.framework/Versions' ;;
+  --ios) echo '/Library/Frameworks/Xamarin.iOS.framework/Versions' ;;
+  --android) echo '/Library/Frameworks/Xamarin.Android.framework/Versions' ;;
+  --mac) echo '/Library/Frameworks/Xamarin.Mac.framework/Versions' ;;
   *) ;;
   esac
 }
