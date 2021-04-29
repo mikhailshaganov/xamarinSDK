@@ -22,7 +22,7 @@ get_framework_path() {
 set_current_folder() {
   local framework=$1
   local version=$2
-  local folderListPosition=$3
+  local folderListPosition=$3 
 
   echo "framework = $framework, version = $version"
 
