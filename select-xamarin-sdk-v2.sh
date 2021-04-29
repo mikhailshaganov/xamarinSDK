@@ -16,7 +16,6 @@ get_framework_path() {
 set_current_folder() {
   local framework=$1
   local version=$2
-  local folderListPosition=$3
 
   echo "framework = $framework, version = $version"
 
@@ -38,10 +37,10 @@ for arg in "$@"; do
   value=$(echo $arg | cut -f2 -d=)
 
   case $key in
-  mono) set_current_folder $key $value 1 ;;
-  ios) set_current_folder $key $value 2 ;;
-  android) set_current_folder $key $value 3 ;;
-  mac) set_current_folder $key $value 4 ;;
+  mono) set_current_folder $key $value ;;
+  ios) set_current_folder $key $value ;;
+  android) set_current_folder $key $value ;;
+  mac) set_current_folder $key $value ;;
   *) ;;
   esac
 done
