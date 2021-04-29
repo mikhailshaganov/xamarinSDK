@@ -1,10 +1,7 @@
 #!/bin/bash -e -o pipefail
 
-echo "Set SDK"
-
-get_framework_path() {
-  local framework=$1
-  case $framework in
+framework_path() {
+  case $1 in
   mono) echo '/Library/Frameworks/Mono.framework/Versions' ;;
   ios) echo '/Library/Frameworks/Xamarin.iOS.framework/Versions' ;;
   android) echo '/Library/Frameworks/Xamarin.Android.framework/Versions' ;;
@@ -13,23 +10,22 @@ get_framework_path() {
   esac
 }
 
-set_current_folder() {
+change_framework_version() {
   local framework=$1
   local version=$2
 
-  echo "framework = $framework, version = $version"
+  echo "Select $framework $version"
 
-  if [ ! -z ${framework} ]; then
-    local countDigit=$(echo "${version}" | grep -o "\." | grep -c "\.")
-    if [[ ! countDigit -eq 1 ]]; then
-      echo "Wrong framework's versions."
-      return
-    fi
+  local countDigit=$(echo "${version}" | grep -o "\." | grep -c "\.")
+  echo "Select ${countDigit}"
+  if [[ countDigit -gt 1 ]]; then
+    echo "[WARNING] It is not recommended to specify version in "a.b.c.d" format because your pipeline can be broken suddenly in future. Use "a.b" format."
+    exit 0
   fi
 
-  local FOLDER=$(get_framework_path "$framework")
-  sudo rm -f ${FOLDER}/Current
-  sudo ln -s "${FOLDER}/${version}" "${FOLDER}/Current"
+  local folder=$(framework_path "$framework")
+  sudo rm -f ${folder}/Current
+  sudo ln -s "${folder}/${version}" "${folder}/Current"
 }
 
 for arg in "$@"; do
@@ -37,10 +33,9 @@ for arg in "$@"; do
   value=$(echo $arg | cut -f2 -d=)
 
   case $key in
-  mono) set_current_folder $key $value ;;
-  ios) set_current_folder $key $value ;;
-  android) set_current_folder $key $value ;;
-  mac) set_current_folder $key $value ;;
-  *) ;;
+  mono | ios | android | mac) change_framework_version $key $value ;;
+  *)
+  echo "Invalid parameter <${key}>"   
+  ;;
   esac
 done
