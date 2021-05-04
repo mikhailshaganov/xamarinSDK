@@ -23,9 +23,9 @@ change_framework_version() {
   local framework_path=$(get_framework_path "$framework")
   local is_existed=$(find framework_path "$version")
   
-  echo "is existed: ${is_existed}"
+  echo "is existed: $is_existed"
 
-  if is_existed; then
+  if [ -z is_existed ]; then
     sudo rm -f "${framework_path}/Current"
     sudo ln -s "${framework_path}/${version}" "${framework_path}/Current"
   else
