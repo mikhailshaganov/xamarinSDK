@@ -24,12 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run script
-        run: bash ./select-xamarin-sdk-v2.sh --mono=6.12
-
-      # Runs a set of commands using the runners shell
+      
       - name: Run a multi-line script
         run: |
           gci /Library/Frameworks/Mono.framework/Versions
@@ -37,3 +32,9 @@ jobs:
           gci /Library/Frameworks/Xamarin.Android.framework/Versions
           gci /Library/Frameworks/Xamarin.Mac.framework/Versions
         shell: pwsh  
+
+      # Runs a single command using the runners shell
+      - name: Run script
+        run: bash ./select-xamarin-sdk-v2.sh --mono=6.12
+
+      # Runs a set of commands using the runners shell
