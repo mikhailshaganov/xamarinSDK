@@ -21,16 +21,16 @@ change_framework_version() {
   fi
 
   local framework_path=$(get_framework_path "$framework")
-  local is_existed=$(find "${framework_path}" -name "${version}*")
+  local is_existed_version=$(find "${framework_path}" -name "${version}*")
   
-  echo "is existed: ${is_existed}"
+  echo "is existed: ${is_existed_version}"
 
-  if [ -z is_existed ]; then
-    sudo rm -f "${framework_path}/Current"
-    sudo ln -s "${framework_path}/${version}" "${framework_path}/Current"
-  else
+  if [ -z is_existed_version ]; then
     echo "Invalid framework version"
     exit 1
+  else
+    sudo rm -f "${framework_path}/Current"
+    sudo ln -s "${framework_path}/${version}" "${framework_path}/Current"
   fi
 }
 
