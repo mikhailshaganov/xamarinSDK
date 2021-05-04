@@ -17,9 +17,7 @@ change_framework_version() {
 
   local countDigit=$(echo "${version}" | grep -o "\." | grep -c "\.")
   
-  echo "countDigit: ${countDigit}"
-  
-  if [[( countDigit -gt 1 ) && ( ! countDigit -eq 4)]]; then
+  if [[( countDigit -gt 1 ) && ( ! countDigit -eq 3)]]; then
     echo "[WARNING] It is not recommended to specify the exact framework version because your build can be broken with the next patch update. Consider using "major.minor" only format."
   fi
 
