@@ -26,7 +26,7 @@ change_framework_version() {
   
   echo "is_existed_version: ${is_existed_version}"
 
-  if [ -z is_existed_version ]; then
+  if [ -z $is_existed_version ]; then
     echo "Invalid framework version"
     exit 1
   else
