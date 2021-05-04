@@ -22,9 +22,7 @@ change_framework_version() {
   fi
 
   local framework_path=$(get_framework_path "$framework")
-  local is_existed_version=$(find "${framework_path}" -name "${version}*")
-  
-  echo "is existed: ${is_existed_version}"
+  local is_existed_version=$(find "${framework_path}" -name "${version}*") | ""
 
   if [ -z is_existed_version ]; then
     echo "Invalid framework version"
