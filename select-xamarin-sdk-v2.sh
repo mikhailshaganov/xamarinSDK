@@ -24,11 +24,11 @@ change_framework_version() {
   local framework_path=$(get_framework_path "$framework")
 
   if [ -d "${framework_path}/${version}" ]; then
-    echo "Invalid framework version ${framework_path}/${version}"
-    exit 1
-  else
     sudo rm -f "${framework_path}/Current"
     sudo ln -s "${framework_path}/${version}" "${framework_path}/Current"
+  else
+    echo "Invalid framework version ${framework_path}/${version}"
+    exit 1
   fi
 }
 
